@@ -20,31 +20,31 @@ export default function ConversationList({
   onSelect,
   activeId,
 }: ConversationListProps) {
-  if (conversations.length === 0) {
-    return (
-      <div className="p-4 text-center text-gray-500 text-sm">
-        <MessageSquare className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-        <p>暂无对话历史</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-1 p-2">
-      {conversations.map((conv) => (
-        <button
-          key={conv.id}
-          onClick={() => onSelect?.(conv.id)}
-          className={`w-full text-left p-3 rounded-lg transition-colors ${
-            activeId === conv.id
-              ? 'bg-blue-50 text-blue-700'
-              : 'hover:bg-gray-100 text-gray-700'
-          }`}
-        >
-          <p className="font-medium text-sm truncate">{conv.title}</p>
-          <p className="text-xs text-gray-500 truncate mt-1">{conv.lastMessage}</p>
-        </button>
-      ))}
+    <div className="p-2">
+      {conversations.length === 0 ? (
+        <div className="px-3 py-6 text-center">
+          <MessageSquare className="w-6 h-6 mx-auto mb-2 text-gray-300" />
+          <p className="text-xs text-gray-400">暂无对话历史</p>
+        </div>
+      ) : (
+        <div className="space-y-0.5">
+          {conversations.map((conv) => (
+            <button
+              key={conv.id}
+              onClick={() => onSelect?.(conv.id)}
+              className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                activeId === conv.id
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'hover:bg-gray-100 text-gray-700'
+              }`}
+            >
+              <p className="text-sm font-medium truncate">{conv.title}</p>
+              <p className="text-xs text-gray-400 truncate mt-0.5">{conv.lastMessage}</p>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -4,12 +4,26 @@ import os
 
 
 class Settings(BaseSettings):
-    # LLM Configuration
+    # LLM Provider: openai / mimo / ollama
+    llm_provider: str = "mimo"
+
+    # OpenAI Configuration
     openai_api_key: str = ""
     openai_model: str = "gpt-4-turbo-preview"
-    claude_api_key: str = ""
+    openai_base_url: str = "https://api.openai.com/v1"
+
+    # Mimo Configuration (Xiaomi AI)
+    mimo_api_key: str = ""
+    mimo_model: str = "mimo-v2.5-pro"
+    mimo_base_url: str = "https://api.mimo.ai/v1"
+
+    # Ollama Configuration
     ollama_base_url: str = "http://localhost:11434"
-    
+    ollama_model: str = "qwen2.5:7b"
+
+    # Claude Configuration
+    claude_api_key: str = ""
+
     # Embedding Configuration
     embedding_model: str = "text-embedding-3-small"
     embedding_dimensions: int = 1536

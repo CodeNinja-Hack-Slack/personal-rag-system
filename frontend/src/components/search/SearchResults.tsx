@@ -1,7 +1,7 @@
 'use client';
 
 import { Search } from 'lucide-react';
-import { useSearch, SearchResult } from '@/hooks/useSearch';
+import { useSearch } from '@/hooks/useSearch';
 import ResultCard from './ResultCard';
 import { useState } from 'react';
 
@@ -39,12 +39,25 @@ export default function SearchResults() {
 
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {loading && (
-          <div className="text-center text-gray-500 py-8">搜索中...</div>
+          <div className="space-y-3">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="bg-white border rounded-lg p-4 animate-pulse">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 bg-gray-200 rounded-lg" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-1/3" />
+                    <div className="h-3 bg-gray-100 rounded w-full" />
+                    <div className="h-3 bg-gray-100 rounded w-2/3" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         )}
 
         {!loading && query && results.length === 0 && (
           <div className="text-center text-gray-500 py-8">
-            未找到与 "{query}" 相关的结果
+            未找到与 &ldquo;{query}&rdquo; 相关的结果
           </div>
         )}
 
@@ -55,8 +68,14 @@ export default function SearchResults() {
           </div>
         )}
 
+        {!loading && results.length > 0 && (
+          <p className="text-xs text-gray-500 mb-2">
+            找到 {results.length} 条相关结果
+          </p>
+        )}
+
         {results.map((result, i) => (
-          <ResultCard key={i} result={result} index={i} />
+          <ResultCard key={i} result={result} index={i} query={query} />
         ))}
       </div>
     </div>
