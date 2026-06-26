@@ -11,18 +11,18 @@ export function useChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const sendMessage = async (question: string, model?: string) => {
+  const sendMessage = async (question: string, topK?: number) => {
     setLoading(true);
     setMessages((prev) => [...prev, { role: 'user', content: question }]);
 
     try {
-      const response = await chatApi(question, model);
+      const response = await chatApi(question, topK);
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
           content: response.answer,
-          sources: response.context,
+          sources: response.sources,
         },
       ]);
     } catch (error) {

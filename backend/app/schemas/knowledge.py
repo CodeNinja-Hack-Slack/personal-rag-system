@@ -33,3 +33,28 @@ class KnowledgeResponse(BaseModel):
 class KnowledgeList(BaseModel):
     items: List[KnowledgeResponse]
     total: int
+
+
+class KnowledgeUpdate(BaseModel):
+    title: Optional[str] = None
+    content: Optional[str] = None
+    content_type: Optional[str] = None
+    source: Optional[str] = None
+    language: Optional[str] = None
+    tags: Optional[List[str]] = None
+    category: Optional[str] = None
+
+
+class KnowledgeImport(BaseModel):
+    items: List[KnowledgeCreate]
+
+
+class SearchResult(BaseModel):
+    content: str
+    metadata: dict
+    distance: Optional[float] = None
+
+
+class SearchResponse(BaseModel):
+    query: str
+    results: List[SearchResult]

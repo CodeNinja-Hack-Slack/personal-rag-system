@@ -1,0 +1,18 @@
+# Data directories
+data/chroma/
+data/sqlite/
+data/documents/
+
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
